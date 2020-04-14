@@ -1,0 +1,23 @@
+{
+  "name": "covid19-brazil-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for COVID19 data from Brazil's Health Ministry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipequintella/covid19-brazil-scraper.git"
+  },
+  "author": "felipequintella",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felipequintella/covid19-brazil-scraper/issues"
+  },
+  "homepage": "https://github.com/felipequintella/covid19-brazil-scraper#readme",
+  "dependencies": {
+    "nickjs": "^0.3.7",
+    "nodejs": "0.0.0"
+  }
+}
