@@ -21,6 +21,8 @@ let scrape = async () => {
     }),
   ]);
 
+  await page.screenshot({path: 'screen.png'});
+
   page.setRequestInterception(true);
 
 //  const result = await page.evaluate(() => {
