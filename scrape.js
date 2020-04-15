@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 
 let scrape = async () => {
 //  const browser = await puppeteer.launch({executablePath: 'chrome.exe', headless: false})
-  const browser = await puppeteer.launch({args: ['--no-sandbox']})
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']})
   const page = await browser.newPage()
 
   await Promise.all([
