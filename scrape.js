@@ -25,11 +25,11 @@ let scrape = async () => {
 
   page.setRequestInterception(true);
 
-//  const result = await page.evaluate(() => {
-//    document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button').click()
-//   })
+  const result = await page.evaluate(() => {
+    document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button').click()
+   })
 
-  await page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button');
+//  await page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button');
 
   page.on('request', request => {
     if (request.resourceType() === 'text/csv' || request.resourceType() === 'document') {

@@ -1,14 +1,21 @@
 /*server.js*/
 
 const http = require('http');
+const fs = require('fs');
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000;
 
 const server = http.createServer(function(req, res) {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+  fs.readFile(__dirname + req.url, function (err,data) {
+    if (err) {
+       res.writeHead(404);
+       res.end(JSON.stringify(err));
+       return;
+    }
+    res.writeHead(200);
+    res.end(data);
+  });
 });
 
 server.listen(port, hostname, function() {
