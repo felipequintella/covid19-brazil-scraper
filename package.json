@@ -1,8 +1,11 @@
 {
   "name": "covid19-brazil-scraper",
+  "engines": {
+    "node": "8.2.1"
+  },
   "version": "1.0.0",
   "description": "Scraper for COVID19 data from Brazil's Health Ministry",
-  "main": "index.js",
+  "main": "scrape.js",
   "scripts": {
     "start": "node scrape.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +21,6 @@
   },
   "homepage": "https://github.com/felipequintella/covid19-brazil-scraper#readme",
   "dependencies": {
-    "nodejs": "0.0.0",
-    "puppeteer": "^2.1.1"
+     "puppeteer": "^2.1.1"
   }
 }
