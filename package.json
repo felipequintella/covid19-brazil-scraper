@@ -1,7 +1,7 @@
 {
   "name": "covid19-brazil-scraper",
   "engines": {
-    "node": "8.2.1"
+    "node": "12.x"
   },
   "version": "1.0.0",
   "description": "Scraper for COVID19 data from Brazil's Health Ministry",
