@@ -6,18 +6,20 @@ let scrape = async () => {
        
        const simpleGit = require('simple-git/promise');
        const git = simpleGit();
-
-//       if (git.checkIsRepo === false) {
-         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
+       console.log("getting in")
+       if (git.checkIsRepo() === false) {
+           console.log("in");
+//         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
 //         await git.mv("./tmp-repo/.git", "./");
 //         await git.reset("--hard", "HEAD")
-//       }
+       }
+       console.log("out")
        
-       git.add('./brazil.csv')
-       git.commit('updating data')
-       git.removeRemote('origin')
-       git.addRemote('origin', remote)
-       await git.push('origin', 'master');
+//       git.add('./brazil.csv')
+//       git.commit('updating data')
+//       git.removeRemote('origin')
+//       git.addRemote('origin', remote)
+//       await git.push('origin', 'master');
 
 }
 
