@@ -41,9 +41,9 @@ let scrape = async () => {
        const simpleGit = require('simple-git/promise');
        const git = simpleGit();
 
-       console.log(git.checkIsRepo());
+       const isRepo = await git.checkIsRepo();
 
-       if (git.checkIsRepo() === false) {
+       if (isRepo === false)
          console.log("Initiating git repo");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
          await git.mv("./tmp-repo/.git", "./");
