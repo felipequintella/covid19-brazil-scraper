@@ -6,12 +6,19 @@ let scrape = async () => {
        
        const simpleGit = require('simple-git/promise');
        const git = simpleGit();
+
+       const result = await git.checkIsRepo();
+
+	console.log(result);
+
        console.log("getting in")
-       if (git.checkIsRepo() === false) {
-           console.log("in");
+       if (result === false) {
+           console.log("inside false");
 //         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
 //         await git.mv("./tmp-repo/.git", "./");
 //         await git.reset("--hard", "HEAD")
+       } else if (result === true) {
+         console.log("inside true")
        }
        console.log("out")
        
