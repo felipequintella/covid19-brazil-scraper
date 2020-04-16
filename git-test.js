@@ -1,3 +1,5 @@
+const mv = require('mv');
+
 let scrape = async () => {
        const USER = process.env.GIT_USER;
        const PASS = process.env.GIT_PASS;
@@ -16,7 +18,8 @@ let scrape = async () => {
            console.log("inside false");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
          console.log("cloned");
-         await git.mv("tmp-repo/.git", ".");
+//         await git.mv("tmp-repo/.git", ".");
+         mv('tmp-repo/.git', '.');
          console.log("moved");
          await git.reset("--hard", "HEAD")
          console.log("reset");
