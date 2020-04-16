@@ -14,9 +14,9 @@ let scrape = async () => {
        console.log("getting in")
        if (result === false) {
            console.log("inside false");
-//         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
-//         await git.mv("./tmp-repo/.git", "./");
-//         await git.reset("--hard", "HEAD")
+         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
+         await git.mv("./tmp-repo/.git", "./");
+         await git.reset("--hard", "HEAD")
        } else if (result === true) {
          console.log("inside true")
        }
