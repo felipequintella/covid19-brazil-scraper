@@ -40,6 +40,13 @@ let scrape = async () => {
        console.log("Pushing");
        const simpleGit = require('simple-git/promise');
        const git = simpleGit();
+
+       if (git.checkIsRepo === false) {
+         await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
+         await git.mv("./tmp-repo/.git", "./");
+         await git.reset("--hard", "HEAD")
+       }
+       
        git.add('./brazil.csv')
        git.commit('updating data')
        git.removeRemote('origin')
