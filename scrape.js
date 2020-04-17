@@ -61,13 +61,12 @@ let scrape = async () => {
        await git.addRemote('origin', remote)
        await git.push('origin', 'master');
 
+       browser.close();
     } else {
        request.continue();
+       browser.close();
     }
   });
-
-  browser.close();
-
 
 };
 
