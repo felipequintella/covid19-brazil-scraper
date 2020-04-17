@@ -1,4 +1,5 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer');
+const mv = require('mv');
 
 let scrape = async () => {
 //  const browser = await puppeteer.launch({executablePath: 'chrome.exe', headless: false})
