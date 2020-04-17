@@ -19,7 +19,7 @@ let scrape = async () => {
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
          console.log("cloned");
 //         await git.mv("tmp-repo/.git", ".");
-         mv('tmp-repo/.git', '.', {mkdirp: true}, function(err) {});
+         mv('./tmp-repo/.git', './', {mkdirp: true}, function(err) {});
          console.log("moved");
          await git.reset("--hard", "HEAD")
          console.log("reset");
