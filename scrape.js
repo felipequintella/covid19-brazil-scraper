@@ -47,15 +47,18 @@ let scrape = async () => {
        if (isRepo === false) {
          console.log("Initiating git repo");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
-//         await git.mv("./tmp-repo/.git", "./");
+         console.log("cloned");
          await mv('./tmp-repo/.git', '.git', {mkdirp:true}, function(err) {});
+         console.log("moved");
          await git.reset("--hard", "HEAD");
+         console.log("reset");
        }
 
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
-
+       console.log("config done");
        await git.add('.')
+       console.log("added");
        await git.commit('updating data')
        await git.removeRemote('origin')
        await git.addRemote('origin', remote)
@@ -64,7 +67,6 @@ let scrape = async () => {
        browser.close();
     } else {
        request.continue();
-       browser.close();
     }
   });
 
