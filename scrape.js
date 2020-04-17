@@ -46,10 +46,11 @@ let scrape = async () => {
        if (isRepo === false)
          console.log("Initiating git repo");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
-         await git.mv("./tmp-repo/.git", "./");
+//         await git.mv("./tmp-repo/.git", "./");
+         await mv('./tmp-repo/.git', '.git', {mkdirp:true}, function(err) {});
          await git.reset("--hard", "HEAD")
        }
-       
+
        git.add('./brazil.csv')
        git.commit('updating data')
        git.removeRemote('origin')
