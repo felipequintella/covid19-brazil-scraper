@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const mv = require('mv');
+const fs = require('fs');
 
 let scrape = async () => {
 //  const browser = await puppeteer.launch({executablePath: 'chrome.exe', headless: false})
@@ -29,7 +30,7 @@ let scrape = async () => {
        console.log(request.url());
        const url = request.url();
        request.abort();
-
+       await fs.unlink("./brazil.csv");
        await download(url);
        console.log("Saved file");
        change = true;
@@ -82,7 +83,6 @@ let scrape = async () => {
 
 let download = async (url) => {
      const https = require('https');
-     const fs = require('fs');
 
      const download = fs.createWriteStream("brazil.csv");
      await new Promise((resolve, reject)=> {
