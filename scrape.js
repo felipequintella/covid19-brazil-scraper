@@ -50,7 +50,7 @@ let scrape = async () => {
          console.log("cloned");
          await mv('./tmp-repo/.git', '.git', {mkdirp:true}, function(err) {});
          console.log("moved");
-         await git.reset("--hard", "HEAD");
+         await git.reset('hard');
          console.log("reset");
        }
 
