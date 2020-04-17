@@ -57,7 +57,7 @@ let scrape = async () => {
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
        console.log("config done");
-       await git.add('./brazil.csv')
+       await git.add('.')
        console.log("added");
        await git.commit('updating data')
        await git.removeRemote('origin')
