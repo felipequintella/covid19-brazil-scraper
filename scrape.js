@@ -57,19 +57,19 @@ let scrape = async () => {
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
        console.log("config done");
-       await git.add('.')
+       await git.add('./brazil.csv')
        console.log("added");
        await git.commit('updating data')
        await git.removeRemote('origin')
        await git.addRemote('origin', remote)
        await git.push('origin', 'master');
 
-       browser.close();
     } else {
        request.continue();
     }
   });
 
+  browser.close();
 };
 
 let download = async (url) => {
