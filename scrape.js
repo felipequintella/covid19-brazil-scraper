@@ -57,7 +57,15 @@ let scrape = async () => {
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
        console.log("config done");
-       await git.add('.')
+       await git.add('./brazil.csv')
+       await git.add('./.gitignore')
+       await git.add('LICENSE')
+       await git.add('README.md')
+       await git.add('git-test.js')
+       await git.add('package.json')
+       await git.add('scrape.js')
+       await git.add('screen.png')
+       await git.add('server.js')
        console.log("added");
        await git.commit('updating data')
        await git.removeRemote('origin')
