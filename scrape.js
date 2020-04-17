@@ -43,18 +43,18 @@ let scrape = async () => {
 
        const isRepo = await git.checkIsRepo();
 
-       if (isRepo === false)
+       if (isRepo === false) {
          console.log("Initiating git repo");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
 //         await git.mv("./tmp-repo/.git", "./");
          await mv('./tmp-repo/.git', '.git', {mkdirp:true}, function(err) {});
-         await git.reset("--hard", "HEAD")
+         await git.reset("--hard", "HEAD");
        }
 
-       git.add('./brazil.csv')
-       git.commit('updating data')
-       git.removeRemote('origin')
-       git.addRemote('origin', remote)
+       await git.add('./brazil.csv')
+       await git.commit('updating data')
+       await git.removeRemote('origin')
+       await git.addRemote('origin', remote)
        await git.push('origin', 'master');
 
     } else {
