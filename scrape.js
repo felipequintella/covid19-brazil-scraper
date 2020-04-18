@@ -29,11 +29,7 @@ let scrape = async () => {
     if (request.resourceType() === 'text/csv' || request.resourceType() === 'document') {
        console.log(request.url());
        const url = request.url();
-       request.abort();
-       fs.unlinkSync("./brazil.csv");
-       await download(url);
-       console.log("Saved file");
-       change = true;
+       await request.abort();
 
        const USER = process.env.GIT_USER;
        const PASS = process.env.GIT_PASS;
@@ -54,6 +50,10 @@ let scrape = async () => {
          await git.reset('hard');
          console.log("reset");
        }
+
+       fs.unlinkSync("./brazil.csv");
+       await download(url);
+       console.log("Saved file");
 
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
