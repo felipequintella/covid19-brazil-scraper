@@ -30,7 +30,7 @@ let scrape = async () => {
        console.log(request.url());
        const url = request.url();
        request.abort();
-       await fs.unlink("./brazil.csv");
+       fs.unlinkSync("./brazil.csv");
        await download(url);
        console.log("Saved file");
        change = true;
