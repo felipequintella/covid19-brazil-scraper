@@ -44,10 +44,13 @@ let scrape = async () => {
        if (isRepo === false) {
          console.log("Initiating git repo");
          await git.clone(remote, "./tmp-repo/", ["--no-checkout"]);
-         console.log("cloned");
+        await timeout(15000); 
+        console.log("cloned");
          await mv('./tmp-repo/.git', '.git', {mkdirp:true}, function(err) {});
+         await timeout(15000);
          console.log("moved");
          await git.reset('hard');
+         await timeout(15000);
          console.log("reset");
        }
 
@@ -80,6 +83,10 @@ let scrape = async () => {
 
   browser.close();
 };
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 let download = async (url) => {
      const https = require('https');
