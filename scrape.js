@@ -15,6 +15,8 @@ let scrape = async () => {
     }),
   ]);
 
+  await timeout(15000);
+
   await page.screenshot({path: 'screen.png'});
 
   page.setRequestInterception(true);
