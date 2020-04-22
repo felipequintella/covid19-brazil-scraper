@@ -15,17 +15,18 @@ let scrape = async () => {
     }),
   ]);
 
-//  await timeout(15000);
+  await timeout(15000);
 
   await page.screenshot({path: 'screen.png'});
 
   page.setRequestInterception(true);
 
   const result = await page.evaluate(() => {
-    document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button').click()
+      document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon').click();
+//    page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon');
    })
 
-   page.on('request', async request => {
+   await page.on('request', async request => {
     console.log("Requesting " + request.url());
 
     if (request.resourceType() === 'text/csv' || request.resourceType() === 'document') {
