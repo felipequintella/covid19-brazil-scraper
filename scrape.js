@@ -8,25 +8,9 @@ let scrape = async () => {
 
   const page = await browser.newPage()
 
-  await Promise.all([
-    page.goto('https://covid.saude.gov.br/'),  
-    page.waitForNavigation({
-      waitUntil: 'networkidle0',
-    }),
-  ]);
+  await  page.setRequestInterception(true);
 
-  await timeout(15000);
-
-  await page.screenshot({path: 'screen.png'});
-
-  page.setRequestInterception(true);
-
-  const result = await page.evaluate(() => {
-      document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon').click();
-//    page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon');
-   })
-
-   await page.on('request', async request => {
+  await page.on('request', async request => {
     console.log("Requesting " + request.url());
 
     if (request.resourceType() === 'text/csv' || request.resourceType() === 'document') {
@@ -79,12 +63,34 @@ let scrape = async () => {
        await git.addRemote('origin', remote)
        await git.push('origin', 'master');
 
+
+       browser.close();
+
     } else {
        request.continue();
     }
   });
 
-  browser.close();
+  await Promise.all([
+    page.goto('https://covid.saude.gov.br/'),  
+    page.waitForNavigation({
+      waitUntil: 'networkidle0',
+    }),
+  ]);
+
+  await timeout(15000);
+
+  await page.screenshot({path: 'screen.png'});
+
+
+  page.evaluate(() => {
+      document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon').click();
+   })
+//  page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon');
+
+
+
+
 };
 
 function timeout(ms) {
