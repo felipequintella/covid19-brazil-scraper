@@ -10,10 +10,10 @@ let scrape = async () => {
 
   await  page.setRequestInterception(true);
 
-  await page.on('request', async request => {
+  page.on('request', async request => {
     console.log("Requesting " + request.url());
 
-    if (request.resourceType() === 'text/csv' || request.resourceType() === 'document') {
+    if (request.url().includes('.csv')) { //resourceType() === 'text/csv' ) { //|| request.resourceType() === 'document') {
        console.log(request.url());
        const url = request.url();
        await request.abort();
