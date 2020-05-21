@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const mv = require('mv');
 const fs = require('fs');
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const XLSX = require('xlsx');
 
 let scrape = async () => {
 //  const browser = await puppeteer.launch({executablePath: 'chrome.exe', headless: false})
@@ -44,14 +44,14 @@ let scrape = async () => {
 
        fs.unlinkSync("./brazil.xlsx");
        await download(url);
-       console.log("Saved file");
+       console.log("Saved file")
 
-       await convert("./brazil.xlsx")
+       await convert("brazil.xlsx")
 
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
        console.log("config done");
-       await git.add('./brazil.csv')
+//       await git.add('./brazil.csv')
        await git.add('./.gitignore')
        await git.add('LICENSE')
        await git.add('README.md')
@@ -61,10 +61,10 @@ let scrape = async () => {
        await git.add('screen.png')
        await git.add('server.js')
        console.log("added");
-       await git.commit('updating data')
-       await git.removeRemote('origin')
-       await git.addRemote('origin', remote)
-       await git.push('origin', 'master');
+//       await git.commit('updating data')
+//       await git.removeRemote('origin')
+//       await git.addRemote('origin', remote)
+//       await git.push('origin', 'master');
 
 
        browser.close();
@@ -115,30 +115,16 @@ let download = async (url) => {
 }
 
 let convert = async(file) => {
-    /* set up XMLHttpRequest */
-    var url = file;
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.responseType = "arraybuffer";
-
-    oReq.onload = function(e) {
-        var arraybuffer = oReq.response;
-
-        /* convert data to binary string */
-        var data = new Uint8Array(arraybuffer);
-        var arr = new Array();
-        for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-        var bstr = arr.join("");
-
-        /* Call XLSX */
-        var workbook = XLSX.read(bstr, {type:"binary"});
-
-        /* DO SOMETHING WITH workbook HERE */
-        var first_sheet_name = workbook.SheetNames[0];
-        /* Get worksheet */
-        var worksheet = workbook.Sheets[first_sheet_name];
-        console.log(XLSX.utils.sheet_to_csv(worksheet,{raw:true}));
-    }
+    console.log("Start of conversion");
+    /* Call XLSX */
+    var workbook = XLSX.readFile(file, {type:"binary"});
+    /* DO SOMETHING WITH workbook HERE */
+    var first_sheet_name = workbook.SheetNames[0];
+    /* Get worksheet */
+    var worksheet = workbook.Sheets[first_sheet_name];
+    csvFile = XLSX.utils.sheet_to_csv(worksheet,{raw:true});
+    XLSX.writeFile(workbook, 'brazil.csv');
+    console.log("End of conversion");
 }
 
 scrape();
