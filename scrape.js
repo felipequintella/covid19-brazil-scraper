@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const mv = require('mv');
 const fs = require('fs');
+const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 let scrape = async () => {
 //  const browser = await puppeteer.launch({executablePath: 'chrome.exe', headless: false})
@@ -13,7 +14,7 @@ let scrape = async () => {
   page.on('request', async request => {
     console.log("Requesting " + request.url());
 
-    if (request.url().includes('.csv')) { //resourceType() === 'text/csv' ) { //|| request.resourceType() === 'document') {
+    if (request.url().includes('.xlsx')) { //resourceType() === 'text/csv' ) { //|| request.resourceType() === 'document') {
        console.log(request.url());
        const url = request.url();
        await request.abort();
@@ -41,9 +42,11 @@ let scrape = async () => {
          console.log("reset");
        }
 
-       fs.unlinkSync("./brazil.csv");
+       fs.unlinkSync("./brazil.xlsx");
        await download(url);
        console.log("Saved file");
+
+       await convert("./brazil.xlsx")
 
        await git.addConfig('user.name', 'felipequintella');
        await git.addConfig('user.email', 'felipequintella86@gmail.com');
@@ -100,7 +103,7 @@ function timeout(ms) {
 let download = async (url) => {
      const https = require('https');
 
-     const download = fs.createWriteStream("brazil.csv");
+     const download = fs.createWriteStream("brazil.xlsx");
      await new Promise((resolve, reject)=> {
         https.get(url, function(response) {
           response.pipe(download);
@@ -109,6 +112,33 @@ let download = async (url) => {
         download.on("error", console.error);
      });
      console.log("End of download");
+}
+
+let convert = async(file) => {
+    /* set up XMLHttpRequest */
+    var url = file;
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.responseType = "arraybuffer";
+
+    oReq.onload = function(e) {
+        var arraybuffer = oReq.response;
+
+        /* convert data to binary string */
+        var data = new Uint8Array(arraybuffer);
+        var arr = new Array();
+        for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+
+        /* Call XLSX */
+        var workbook = XLSX.read(bstr, {type:"binary"});
+
+        /* DO SOMETHING WITH workbook HERE */
+        var first_sheet_name = workbook.SheetNames[0];
+        /* Get worksheet */
+        var worksheet = workbook.Sheets[first_sheet_name];
+        console.log(XLSX.utils.sheet_to_csv(worksheet,{raw:true}));
+    }
 }
 
 scrape();
