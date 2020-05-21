@@ -25,6 +25,5 @@
     "puppeteer": "^2.1.1",
     "simple-git": "^1.132.0",
     "xlsx": "^0.16.1",
-    "xmlhttprequest": "^1.8.0"
   }
 }

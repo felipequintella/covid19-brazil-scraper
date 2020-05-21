@@ -122,7 +122,7 @@ let convert = async(file) => {
     var first_sheet_name = workbook.SheetNames[0];
     /* Get worksheet */
     var worksheet = workbook.Sheets[first_sheet_name];
-    csvFile = XLSX.utils.sheet_to_csv(worksheet,{raw:true});
+//    csvFile = XLSX.utils.sheet_to_csv(worksheet,{raw:true});
     XLSX.writeFile(workbook, 'brazil.csv');
     console.log("End of conversion");
 }
