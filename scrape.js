@@ -88,7 +88,7 @@ let scrape = async () => {
 
 
   page.evaluate(() => {
-      document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon').click();
+      document.querySelector('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.max-width-full.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon').click();
    })
 //  page.click('body > app-root > ion-app > ion-router-outlet > app-home > ion-content > div.content-top.display-flex.justify-between > div.card-total.col-right.no-shadow.display-flex.justify-end > ion-button > ion-icon');
 
