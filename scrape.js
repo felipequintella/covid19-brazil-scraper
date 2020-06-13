@@ -124,7 +124,9 @@ let convert = async(file) => {
     /* Get worksheet */
     var worksheet = workbook.Sheets[first_sheet_name];
 //    csvFile = XLSX.utils.sheet_to_csv(worksheet,{raw:true});
-    XLSX.writeFile(workbook, 'brazil.csv');
+    var stream = XLSX.stream.to_csv(worksheet);
+    stream.pipe(fs.createWriteStream(output_file_name));
+    //XLSX.writeFile(workbook, 'brazil.csv');
     console.log("End of conversion");
 }
 
