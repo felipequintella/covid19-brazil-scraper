@@ -117,15 +117,20 @@ let download = async (url) => {
 
 let convert = async(file) => {
     console.log("Start of conversion");
-    /* Call XLSX */
-    var workbook = XLSX.readFile(file, {type:"binary"});
-    console.log("File read");
-    var stream = XLSX.stream.to_csv(worksheet);
-    console.log("Stream created");
-    stream.pipe(fs.createWriteStream('brazil.csv'));
-    console.log("Stream finalized");
-    //XLSX.writeFile(workbook, 'brazil.csv');
-    console.log("End of conversion");
+    fs.readFile("test.txt", function (err, data) {
+        if (err) throw err;
+        console.log("Buffer read")
+        /* Call XLSX */
+        var workbook = XLSX.read(data);
+        console.log("File read");
+        var stream = XLSX.stream.to_csv(worksheet);
+        console.log("Stream created");
+        stream.pipe(fs.createWriteStream('brazil.csv'));
+        console.log("Stream finalized");
+        //XLSX.writeFile(workbook, 'brazil.csv');
+        console.log("End of conversion");
+    });
+    
 }
 
 scrape();
