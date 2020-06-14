@@ -119,13 +119,11 @@ let convert = async(file) => {
     console.log("Start of conversion");
     /* Call XLSX */
     var workbook = XLSX.readFile(file, {type:"binary"});
-    /* DO SOMETHING WITH workbook HERE */
-    var first_sheet_name = workbook.SheetNames[0];
-    /* Get worksheet */
-    var worksheet = workbook.Sheets[first_sheet_name];
-//    csvFile = XLSX.utils.sheet_to_csv(worksheet,{raw:true});
+    console.log("File read");
     var stream = XLSX.stream.to_csv(worksheet);
-    stream.pipe(fs.createWriteStream(output_file_name));
+    console.log("Stream created");
+    stream.pipe(fs.createWriteStream('brazil.csv'));
+    console.log("Stream finalized");
     //XLSX.writeFile(workbook, 'brazil.csv');
     console.log("End of conversion");
 }
