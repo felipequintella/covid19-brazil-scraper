@@ -117,7 +117,7 @@ let download = async (url) => {
 
 let convert = async(file) => {
     console.log("Start of conversion");
-    fs.readFile("test.txt", function (err, data) {
+    fs.readFile(file, function (err, data) {
         if (err) throw err;
         console.log("Buffer read")
         /* Call XLSX */
